@@ -7,15 +7,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: GoogleCloudPlatform/release-please-action@v2
-        id: release
-        with:
-          release-type: ruby
-          package-name: active_resourceable
-          bump-minor-pre-major: true
-          version-file: "lib/active_resourceable/version.rb"
       - uses: actions/checkout@v2
-        if: ${{ steps.release.outputs.release_created  }}
       - name: publish gem
         run: |
           mkdir -p $HOME/.gem
@@ -26,4 +18,3 @@ jobs:
           gem push *.gem
         env:
           GEM_HOST_API_KEY: "${{secrets.RUBYGEMS_AUTH_TOKEN}}"
-        if: ${{ steps.release.outputs.release_created  }}
