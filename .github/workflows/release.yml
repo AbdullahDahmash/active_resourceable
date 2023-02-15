@@ -7,7 +7,15 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: GoogleCloudPlatform/release-please-action@v2
+        id: release
+        with:
+          release-type: ruby
+          package-name: active_resourceable
+          bump-minor-pre-major: true
+          version-file: "lib/active_resourceable/version.rb"
+      - uses: actions/checkout@v2
+        if: ${{ steps.release.outputs.release_created  }}
       - name: publish gem
         run: |
           mkdir -p $HOME/.gem
