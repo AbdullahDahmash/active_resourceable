@@ -31,9 +31,6 @@ module ActiveResourceable
       ActiveSupport.on_load(:active_record) do
         include ActiveResourceable::Governable
         include ActiveResourceable::Asyncable
-        scope :unpaginate, ->() {
-          offset(nil).limit(nil)
-        }
       end
     end
   end
