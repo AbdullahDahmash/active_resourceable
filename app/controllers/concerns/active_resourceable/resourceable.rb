@@ -87,7 +87,7 @@ module ActiveResourceable::Resourceable
 
       define_method(:access_object) do
         @access.authenticated_user
-      end
+      end unless method_defined? :access_object
 
       define_method(:filter_params) do
         params.fetch(:filters, {}).permit(*filter_set.keys)
